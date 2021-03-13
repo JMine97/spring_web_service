@@ -1,4 +1,4 @@
-package spring.spring_web_service.controller;
+package spring.spring_web_service.web.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

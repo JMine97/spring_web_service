@@ -1,9 +1,9 @@
-package spring.spring_web_service.controller;
+package spring.spring_web_service.web.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import spring.spring_web_service.dto.HelloResponseDto;
+import spring.spring_web_service.web.dto.HelloResponseDto;
 
 @RestController
 public class HelloController {

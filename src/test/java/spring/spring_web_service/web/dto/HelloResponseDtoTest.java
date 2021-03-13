@@ -1,4 +1,4 @@
-package spring.spring_web_service.dto;
+package spring.spring_web_service.web.dto;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -16,5 +16,8 @@ public class HelloResponseDtoTest {
 
         assertThat(dto.getName()).isEqualTo(name);
         assertThat(dto.getAmount()).isEqualTo(amount);
+
+        assertThat(dto.getName()).isEqualTo(name);
+
     }
 }
