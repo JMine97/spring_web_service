@@ -10,21 +10,18 @@ import spring.spring_web_service.config.auth.dto.SessionUser;
 import spring.spring_web_service.service.posts.PostsService;
 import spring.spring_web_service.web.dto.PostsResponseDto;
 
-import javax.servlet.http.HttpSession;
-
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
 
-    private final PostsService postService;
+    private final PostsService postsService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
-        model.addAttribute("posts", postService.findAllDesc());
-        if(user != null){
+        model.addAttribute("posts", postsService.findAllDesc());
+        if (user != null) {
             model.addAttribute("userName", user.getName());
         }
-
         return "index";
     }
 
@@ -34,12 +31,10 @@ public class IndexController {
     }
 
     @GetMapping("/posts/update/{id}")
-    public String postsUpdate(@PathVariable Long id, Model model){
-
-        PostsResponseDto dto = postService.findById(id);
+    public String postsUpdate(@PathVariable Long id, Model model) {
+        PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
 
         return "posts-update";
     }
-
 }
