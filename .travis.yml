@@ -18,33 +18,37 @@ before_install:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r spring_web_service ./*
-  - mkdir -p deploy
-  - mv spring_web_service.zip deploy/spring_web_service.zip
+  - mkdir -p before-deploy
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cp build/libs/*.jar before-deploy/
+  - cd before-deploy && zip -r before-deploy *
+  - cd ../ && mkdir -p deploy
+  - mv before-deploy/before-deploy.zip deploy/spring_web_service.zip
 
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
 
-    bucket: jmchoi-springboot-build
+    bucket: jmchoi-springboot-build #S3 버킷 이름
     region: ap-northeast-2
     skip_cleanup: true
-    acl: private
-    local_dir: deploy
+    acl: private #zip 파일 접근 private으로
+    local_dir: deploy #before_deploy에서 생성한 디렉토리
     wait_until_deployed : true
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
 
-    bucket: jmchoi-springboot-build
-    key : spring_web_service.zip
+    bucket: jmchoi-springboot-build #S3 버킷 이름
+    key : spring_web_service.zip #빌드 파일을 압축해서 전달
 
     bundle_type : zip
-    application : freelec-springboot2-webservice
+    application : freelec-springboot2-webservice #콘솔에 등록한 CodeDeploy 애플리케이션
 
-    deplyment_group : freelec-springboot2-webservice-group
+    deplyment_group : freelec-springboot2-webservice-group #웹 콘솔에 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
     wait-until-deployed : true
 
