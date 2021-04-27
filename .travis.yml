@@ -39,10 +39,10 @@ deploy:
     secret_access_key: $AWS_SECRET_KEY
 
     bucket: jmchoi-springboot-build
-    key : springboot-webservice.zip
+    key : spring_web_service.zip
 
     bundle_type : zip
-    application : springboot-webservice
+    application : spring_web_service
 
     deplyment_group : springboot-webservice-group
     region: ap-northeast-2
