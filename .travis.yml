@@ -42,7 +42,7 @@ deploy:
     key : spring_web_service.zip
 
     bundle_type : zip
-    application : spring_web_service
+    application : freelec-springboot2-webservice
 
     deplyment_group : springboot-webservice-group
     region: ap-northeast-2
